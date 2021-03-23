@@ -44,7 +44,7 @@ nav ul li a {
     text-decoration: none;
 }
 
-nav ul li a.active {
+nav ul li a.router-link-exact-active {
     background: #24006b;
 }
 

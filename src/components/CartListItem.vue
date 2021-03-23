@@ -1,14 +1,31 @@
 <template>
     <div class="cartlist-item">
-        <p>Smartphone</p>
-        <p>2</p>
-        <p>399,99€</p>
-        <p><button>add</button><button>remove</button></p>
+        <p>{{ cartProduct.name }}</p>
+        <p>{{ cartProduct.quantity }}</p>
+        <p>{{ cartProductGroupPrice }}€ ({{ cartProduct.price }}€ each)</p>
+        <p>
+            <button @click="removeFromCart()">
+                remove
+            </button>
+        </p>
     </div>
 </template>
 
 <script>
-export default {};
+export default {
+    props: ["cartProduct"],
+    computed: {
+        cartProductGroupPrice() {
+            return this.cartProduct.price * this.cartProduct.quantity;
+        },
+    },
+    methods: {
+        removeFromCart() {
+            this.$store.commit("removeFromCart", this.cartProduct);
+            // console.log(this.cartProduct);
+        },
+    },
+};
 </script>
 
 <style>

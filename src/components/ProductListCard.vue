@@ -1,17 +1,20 @@
 <template>
     <section class="product">
         <div class="image">
-            <img src="/images/123.jpg" alt="Smartphone" />
+            <img :src="product.image" :alt="product.name" />
         </div>
         <div class="description">
-            <h2>Smartphone</h2>
-            <p>The best camera is the one that you carry 24/7.</p>
+            <h2>{{ product.name }}</h2>
+            <p>{{ product.description }}</p>
             <aside>
                 <ul>
-                    <li>Price: 450 €</li>
-                    <li>In Stock: 4 items</li>
+                    <li>Price: {{ product.price }} {{ product.currency }}</li>
+                    <li>In Stock: {{ stockCountLeft }} items</li>
+                    <!-- stockCount will be updated after database integration -->
                 </ul>
-                <button>Add to Cart/ Out of Stock</button>
+                <button :disabled="outOfStock" @click="addToCart()">
+                    {{ outOfStock ? "Sold Out" : "Add to Cart" }}
+                </button>
             </aside>
         </div>
     </section>
@@ -19,7 +22,38 @@
 </template>
 
 <script>
-export default {};
+export default {
+    props: ["product"],
+    methods: {
+        addToCart() {
+            this.$store.commit("addToCart", this.product);
+        },
+    },
+    computed: {
+        outOfStock() {
+            const oosProducts = this.$store.getters.outOfStockCartProducts;
+            let isOutOfStock = false;
+
+            // check if there are any products left with the help of the "stockCount"
+            // and also if you already add too many items to the cart
+            if (
+                this.product.stockCount === 0 ||
+                oosProducts.find((p) => p.id === this.product.id)
+            )
+                isOutOfStock = true;
+
+            return isOutOfStock;
+        },
+        stockCountLeft() {
+            const cartProduct = this.$store.getters.cartProduct(this.product);
+            let quantity = 0;
+            if (cartProduct) quantity = cartProduct.quantity;
+
+            // subtract the amounts of products in the cart from the "stockCount"
+            return this.product.stockCount - quantity;
+        },
+    },
+};
 </script>
 
 <style scoped>

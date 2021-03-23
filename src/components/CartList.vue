@@ -1,10 +1,11 @@
 <template>
     <div class="cartlist-wrapper">
-        <CartListItem />
-        <CartListItem />
-        <CartListItem />
-        <CartListItem />
-        <p><strong>Total Cost:</strong> 1999,00€</p>
+        <CartListItem
+            v-for="cartProduct in cartProducts"
+            :key="cartProduct.id"
+            :cartProduct="cartProduct"
+        />
+        <p><strong>Total Cost:</strong> {{ totalPrice }}€</p>
     </div>
 </template>
 
@@ -12,8 +13,29 @@
 import CartListItem from "../components/CartListItem.vue";
 
 export default {
+    data() {
+        return {
+            cartProducts: this.$store.state.cart,
+        };
+    },
     components: {
         CartListItem,
+    },
+    computed: {
+        totalPrice() {
+            if (this.cartProducts.length > 1)
+                return this.cartProducts.reduce(
+                    (a, b) =>
+                        b.price * b.quantity +
+                        (a.price * a.quantity ? a.price * a.quantity : a)
+                );
+            else if (this.cartProducts.length == 1) {
+                return (
+                    this.cartProducts[0].price * this.cartProducts[0].quantity
+                );
+            }
+            return 0;
+        },
     },
 };
 </script>
