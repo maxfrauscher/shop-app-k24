@@ -4,7 +4,7 @@ import CartPage from "../views/CartPage.vue";
 
 const routes = [
     {
-        path: "/",
+        path: "/products",
         name: "Product Listing Page",
         component: ProductListPage,
     },

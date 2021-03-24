@@ -1,10 +1,15 @@
 <template>
     <div class="cartlist-item">
-        <p>{{ cartProduct.name }}</p>
-        <p>{{ cartProduct.quantity }}</p>
-        <p>{{ cartProductGroupPrice }}€ ({{ cartProduct.price }}€ each)</p>
+        <h2>{{ cartProduct.name }}</h2>
+        <p>Amount: {{ cartProduct.quantity }}</p>
         <p>
-            <button @click="removeFromCart()">
+            Price:
+            {{ cartProductGroupPrice }}
+            {{ cartProduct.currency }}
+            ({{ cartProduct.price }} {{ cartProduct.currency }} each)
+        </p>
+        <p>
+            <button class="btn" @click="removeFromCart()">
                 remove
             </button>
         </p>
@@ -28,14 +33,21 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .cartlist-item {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 0px;
-    grid-auto-rows: minmax(100px, auto);
-    margin: 5px;
+    grid-auto-rows: minmax(auto, auto);
+    background-color: white;
     padding: 10px;
-    border: 1px solid black;
+    margin-top: 20px;
+    line-height: 40px;
+}
+
+@media (max-width: 600px) {
+    .cartlist-item {
+        display: inline;
+    }
 }
 </style>

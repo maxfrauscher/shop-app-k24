@@ -4,21 +4,33 @@
             <img :src="product.image" :alt="product.name" />
         </div>
         <div class="description">
-            <h2>{{ product.name }}</h2>
-            <p>{{ product.description }}</p>
-            <aside>
-                <ul>
-                    <li>Price: {{ product.price }} {{ product.currency }}</li>
-                    <li>In Stock: {{ stockCountLeft }} items</li>
-                    <!-- stockCount will be updated after database integration -->
-                </ul>
-                <button :disabled="outOfStock" @click="addToCart()">
+            <div class="top-grid bottom-grid-col1">
+                <h2>{{ product.name }}</h2>
+                <span class="price bottom-grid-col2"
+                    >{{ product.price }} {{ product.currency }}</span
+                >
+            </div>
+            <div>
+                <span class="product-description">{{
+                    product.description
+                }}</span>
+            </div>
+            <hr />
+            <div class="bottom-grid">
+                <span class="items-left bottom-grid-col1"
+                    >{{ stockCountLeft }} left</span
+                >
+                <button
+                    class="btn bottom-grid-col2"
+                    :disabled="outOfStock"
+                    @click="addToCart()"
+                >
                     {{ outOfStock ? "Sold Out" : "Add to Cart" }}
                 </button>
-            </aside>
+            </div>
+            <!-- stockCount will be updated after database integration -->
         </div>
     </section>
-    <!-- use public/products.js to populate the html -->
 </template>
 
 <script>
@@ -56,13 +68,77 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+// color theme variables
+// ----------------------
+$dark-grey: #131417;
+$text-black: #2f2f2f;
+$orange: #f25f29; // hover, active
+$gray: #616161; // disabled
+// ----------------------
+
 section {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 0px;
     grid-auto-rows: minmax(100px, auto);
-    border: 1px solid black;
+    border-radius: 2px;
+    background: white;
+    height: auto;
+    margin: 10px;
+}
+
+.top-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 10px;
+    grid-auto-rows: minmax(auto, auto);
+}
+
+.bottom-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 10px;
+    grid-auto-rows: minmax(auto, auto);
+}
+
+.product-description {
+    display: flex;
+    height: 100px;
+
+    overflow: hidden;
+}
+
+.bottom-grid-col1 {
+    grid-column: 1;
+    grid-row: 1;
+}
+.bottom-grid-col2 {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.price {
+    height: 42px;
+    line-height: 42px;
+    text-align: center;
+    font-weight: 200;
+    margin-left: 0;
+    color: $text-black;
+    bottom: 0px;
+}
+
+.items-left {
+    font-weight: 200;
+    background-color: $orange;
+    color: white;
+    text-align: center;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
 }
 
 .image {
@@ -71,7 +147,6 @@ section {
 }
 
 .description {
-    grid-column: 1;
-    grid-row: 2;
+    margin: 10px;
 }
 </style>

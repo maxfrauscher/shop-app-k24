@@ -1,7 +1,4 @@
 <template>
-    <header>
-        <h1>Products</h1>
-    </header>
     <div class="products-wrapper">
         <ProductListCard
             v-for="product in products"
@@ -32,8 +29,22 @@ export default {
 .products-wrapper {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
-    grid-auto-rows: minmax(100px, auto);
+    grid-gap: 0px;
+    grid-auto-rows: minmax(50px, auto);
     margin: 10px;
+}
+
+@media (max-width: 600px) {
+    .products-wrapper {
+        grid-template-columns: 1fr 1fr;
+        margin: 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    .products-wrapper {
+        grid-template-columns: 1fr;
+        margin: 10px;
+    }
 }
 </style>

@@ -5,6 +5,12 @@
             :key="cartProduct.id"
             :cartProduct="cartProduct"
         />
+    </div>
+    <div v-if="totalPrice === 0" class="white-bar">
+        <p>The cart is empty.</p>
+    </div>
+    <hr />
+    <div class="white-bar">
         <p><strong>Total Cost:</strong> {{ totalPrice }}€</p>
     </div>
 </template>
@@ -40,11 +46,24 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .cartlist-wrapper {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 0px;
-    grid-auto-rows: minmax(100px, auto);
+    grid-auto-rows: minmax(auto, auto);
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+hr {
+    margin: 20px;
+}
+
+.white-bar {
+    display: grid;
+    margin: 20px;
+    padding: 10px;
+    background: white;
 }
 </style>
