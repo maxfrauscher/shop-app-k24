@@ -1,0 +1,5 @@
+<template>
+    <header>
+        <h1>This is the homepage.</h1>
+    </header>
+</template>

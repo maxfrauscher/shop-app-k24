@@ -11,10 +11,10 @@
                 <router-link to="/products">Products</router-link>
             </li>
             <li>
-                <router-link to="/"> Offers </router-link>
+                <router-link to="/offers"> Offers </router-link>
             </li>
             <li>
-                <router-link to="/"> Service </router-link>
+                <router-link to="/service"> Service </router-link>
             </li>
             <li>
                 <router-link to="/cart">
