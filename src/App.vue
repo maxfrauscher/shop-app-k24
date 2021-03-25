@@ -18,8 +18,11 @@
             </li>
             <li>
                 <router-link to="/cart">
-                    <i class="pi pi-shopping-cart"></i
-                ></router-link>
+                    <i class="pi pi-shopping-cart"></i>
+                    <span v-if="productsInCart" class="small-numbers">
+                        {{ productsInCart }}</span
+                    >
+                </router-link>
             </li>
         </ul>
     </nav>
@@ -31,6 +34,16 @@
         <div class="space-col"></div>
     </div>
 </template>
+
+<script>
+export default {
+    computed: {
+        productsInCart() {
+            return this.$store.state.cart.length;
+        },
+    },
+};
+</script>
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
@@ -52,6 +65,19 @@ body {
 
 body::-webkit-scrollbar {
     display: none;
+}
+
+.small-numbers {
+    position: absolute;
+    font-size: 12px;
+    margin-top: -5px;
+    width: 14px;
+    height: 14px;
+    vertical-align: top;
+    color: white;
+    background: $orange;
+    border: 2px solid $orange;
+    border-radius: 20px;
 }
 
 .body-grid {

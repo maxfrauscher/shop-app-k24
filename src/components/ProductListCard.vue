@@ -6,18 +6,20 @@
         <div class="description">
             <div class="top-grid bottom-grid-col1">
                 <h2>{{ product.name }}</h2>
-                <span class="price bottom-grid-col2"
-                    >{{ product.price }} {{ product.currency }}</span
-                >
+                <span class="price bottom-grid-col2">
+                    {{ product.price }} {{ product.currency }}
+                </span>
             </div>
             <div>
-                <span class="product-description">{{
-                    product.description
-                }}</span>
+                <span class="product-description"
+                    >{{ product.description }}
+                </span>
             </div>
             <hr />
             <div class="bottom-grid">
-                <span class="items-left bottom-grid-col1"
+                <span
+                    class="items-left bottom-grid-col1"
+                    :class="stockCountLeft == 0 ? 'disabled' : ''"
                     >{{ stockCountLeft }} left</span
                 >
                 <button
@@ -87,6 +89,10 @@ section {
     background: white;
     height: auto;
     margin: 10px;
+}
+
+.disabled {
+    background-color: $gray !important;
 }
 
 .top-grid {

@@ -11,7 +11,7 @@
     </div>
     <hr />
     <div class="white-bar">
-        <p><strong>Total Cost:</strong> {{ totalPrice }}€</p>
+        <p><strong>Total Cost:</strong> {{ totalPrice }} €</p>
     </div>
 </template>
 
