@@ -36,11 +36,12 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
     computed: {
-        productsInCart() {
-            return this.$store.state.cart.length;
-        },
+        ...mapState({
+            productsInCart: (state) => state.cart.length,
+        }),
     },
 };
 </script>

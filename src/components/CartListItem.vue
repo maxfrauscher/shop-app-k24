@@ -1,15 +1,22 @@
 <template>
     <div class="cartlist-item">
-        <h2>{{ cartProduct.name }}</h2>
+        <h2 id="cartproduct-name">{{ cartProduct.name }}</h2>
         <p>Amount: {{ cartProduct.quantity }}</p>
         <p>
             Price:
-            {{ cartProductGroupPrice }}
+            <span id="cartproduct-group-price">{{
+                cartProductGroupPrice
+            }}</span>
             {{ cartProduct.currency }}
-            ({{ cartProduct.price }} {{ cartProduct.currency }} each)
+            <span id="cartproduct-price">({{ cartProduct.price }} </span>
+            {{ cartProduct.currency }} each)
         </p>
         <p>
-            <button class="btn" @click="removeFromCart()">
+            <button
+                id="remove-from-cart-btn"
+                class="btn"
+                @click="removeFromCart()"
+            >
                 remove
             </button>
         </p>

@@ -6,28 +6,27 @@
             :cartProduct="cartProduct"
         />
     </div>
-    <div v-if="totalPrice === 0" class="white-bar">
+    <div id="cart-is-empty" v-if="cartProducts.length === 0" class="white-bar">
         <p>The cart is empty.</p>
     </div>
     <hr />
     <div class="white-bar">
-        <p><strong>Total Cost:</strong> {{ totalPrice }} €</p>
+        <p id="total-price"><strong>Total Cost:</strong> {{ totalPrice }} €</p>
     </div>
 </template>
 
 <script>
 import CartListItem from "../components/CartListItem.vue";
+import { mapState } from "vuex";
 
 export default {
-    data() {
-        return {
-            cartProducts: this.$store.state.cart,
-        };
-    },
     components: {
         CartListItem,
     },
     computed: {
+        ...mapState({
+            cartProducts: (state) => state.cart,
+        }),
         totalPrice() {
             if (this.cartProducts.length > 1)
                 return this.cartProducts.reduce(

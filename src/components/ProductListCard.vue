@@ -3,26 +3,26 @@
         <div class="image">
             <img :src="product.image" :alt="product.name" />
         </div>
-        <div class="description">
+        <div class="details">
             <div class="top-grid bottom-grid-col1">
-                <h2>{{ product.name }}</h2>
-                <span class="price bottom-grid-col2">
+                <h2 id="product-name">{{ product.name }}</h2>
+                <span id="product-price" class="price bottom-grid-col2">
                     {{ product.price }} {{ product.currency }}
                 </span>
             </div>
             <div>
-                <span class="product-description"
-                    >{{ product.description }}
-                </span>
+                <span id="product-description">{{ product.description }} </span>
             </div>
             <hr />
             <div class="bottom-grid">
                 <span
-                    class="items-left bottom-grid-col1"
+                    id="product-items-left"
+                    class="bottom-grid-col1"
                     :class="stockCountLeft == 0 ? 'disabled' : ''"
                     >{{ stockCountLeft }} left</span
                 >
                 <button
+                    id="add-to-cart-btn"
                     class="btn bottom-grid-col2"
                     :disabled="outOfStock"
                     @click="addToCart()"
@@ -36,7 +36,9 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
+    name: "ProductListCard",
     props: ["product"],
     methods: {
         addToCart() {
@@ -44,8 +46,9 @@ export default {
         },
     },
     computed: {
+        ...mapGetters(["outOfStockCartProducts", "cartProduct"]),
         outOfStock() {
-            const oosProducts = this.$store.getters.outOfStockCartProducts;
+            const oosProducts = this.outOfStockCartProducts;
             let isOutOfStock = false;
 
             // check if there are any products left with the help of the "stockCount"
@@ -59,9 +62,8 @@ export default {
             return isOutOfStock;
         },
         stockCountLeft() {
-            const cartProduct = this.$store.getters.cartProduct(this.product);
-            let quantity = 0;
-            if (cartProduct) quantity = cartProduct.quantity;
+            const cartProduct = this.cartProduct(this.product);
+            let quantity = cartProduct ? cartProduct.quantity : 0;
 
             // subtract the amounts of products in the cart from the "stockCount"
             return this.product.stockCount - quantity;
@@ -111,7 +113,7 @@ section {
     grid-auto-rows: minmax(auto, auto);
 }
 
-.product-description {
+#product-description {
     display: flex;
     height: 100px;
 
@@ -137,7 +139,7 @@ section {
     bottom: 0px;
 }
 
-.items-left {
+#product-items-left {
     font-weight: 200;
     background-color: $orange;
     color: white;
@@ -152,7 +154,7 @@ section {
     grid-row: 1;
 }
 
-.description {
+.details {
     margin: 10px;
 }
 </style>
