@@ -73,13 +73,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// color theme variables
-// ----------------------
-$dark-grey: #131417;
-$text-black: #2f2f2f;
-$orange: #f25f29; // hover, active
-$gray: #616161; // disabled
-// ----------------------
+@import "../../public/scss/global-colors.scss";
 
 section {
     position: relative;
@@ -94,7 +88,7 @@ section {
 }
 
 .disabled {
-    background-color: $gray !important;
+    background-color: $grey !important;
 }
 
 .top-grid {

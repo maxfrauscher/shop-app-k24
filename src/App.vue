@@ -48,13 +48,7 @@ export default {
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
-// color theme variables
-// ----------------------
-$dark-grey: #131417;
-$text-black: #2f2f3f;
-$orange: #f25f29; // hover, active
-$grey: #616161; // disabled
-// ----------------------
+@import "../public/scss/global-colors.scss";
 
 body {
     font-family: "Roboto", sans-serif;
