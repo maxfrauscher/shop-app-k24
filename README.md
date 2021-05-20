@@ -171,7 +171,7 @@ If there is no product in the cart a white bar with the text "The cart is empty"
 
 ## 6. Responsive design
 
-The layout of the product page and the cart page will change depending on the device with.
+The layout of the product page and the cart page will change depending on the device width.
 
 ![](https://i.imgur.com/ShpFuQ5.png)
 
